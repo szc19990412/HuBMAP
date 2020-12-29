@@ -1,0 +1,45 @@
+General:
+    comment: tile-size:512 fold:2 cv:0.929 LB：0.848
+    seed: 1222
+    fp16: True
+    amp_level: O2
+    multi_gpu_mode: ddp
+    gpus: [0]
+    epoch: &epoch 60
+    grad_acc: 2
+    frozen_bn: False
+    debug: False  # This value overwritten in train.py
+    server: local #kaggle
+
+Data:
+    dataset:
+        label_dir: /newdata/shaozc/Kaggle-HuBMAP/train.csv
+        train_dir: /newdata/shaozc/Kaggle-HuBMAP/0.25_512_256_train_corrected/
+        mask_dir: /newdata/shaozc/Kaggle-HuBMAP/0.25_512_256_train_corrected/
+        data_dir: /newdata/shaozc/Kaggle-HuBMAP/
+        image_dir: 0.25_512_256_train_corrected
+        fold: 2
+        nfolds: 8
+        seed: 2020
+
+    dataloader:
+        batch_size: 8 #6
+        num_workers: 8
+    
+    testdataset:
+        test_dir: /newdata/shaozc/Kaggle-HuBMAP/test
+        label_dir: /newdata/shaozc/Kaggle-HuBMAP/sample_submission.csv
+        submit_dir: /newdata/shaozc/Kaggle-HuBMAP/submit
+        reduce: 4
+        tile_size: 1024
+
+Model:
+    # base: efficientnet-b1
+    # in_channel: 3
+    # out_channel: 10
+    # pretrained: True
+    # pool_type: gem
+    phase: train
+    base: CustomUneXt50
+
+
