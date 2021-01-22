@@ -1,0 +1,56 @@
+General:
+    comment: tile-size:320 fold:1 
+    seed: 1222
+    fp16: True
+    amp_level: O2
+    multi_gpu_mode: dp
+    gpus: [0]
+    epoch: &epoch 30 #训练的总次数
+    grad_acc: 2
+    frozen_bn: False
+    debug: False  # This value overwritten in train.py
+    server: local #kaggle #local 代表训练，kaggle代表测试
+
+Data:
+    dataset:
+        label_dir: /data/shaozc/Kaggle-HuBMAP/train.csv
+        train_dir: /data/shaozc/Kaggle-HuBMAP/0.25_320_160_train_corrected/
+        mask_dir: /data/shaozc/Kaggle-HuBMAP/0.25_320_160_train_corrected/
+        data_dir: /data/shaozc/Kaggle-HuBMAP/
+        image_dir: 0.25_320_160_train_corrected #文件夹名字
+        fold: 0
+        nfolds: 4
+        seed: 2020
+
+    dataloader:
+        batch_size: 16 #6
+        num_workers: 8
+    
+    testdataset:
+        test_dir: /data/shaozc/Kaggle-HuBMAP/test
+        label_dir: /data/shaozc/Kaggle-HuBMAP/sample_submission.csv
+        submit_dir: /data/shaozc/Kaggle-HuBMAP/submit
+        tile_size: 320
+        tile_average_step: 160
+        tile_scale: 0.25
+        tile_min_score: 0.25
+
+Model:
+    # base: efficientnet-b1
+    # in_channel: 3
+    # out_channel: 10
+    # pretrained: True
+    # pool_type: gem
+    phase: train
+    base: CustomUneXt50
+
+Optimizer:
+    opt: lookahead_radam
+    lr: 0.0005
+    opt_eps: null #大或等于0的小浮点数，防止除0错误
+    opt_betas: null
+    momentum: null #0.9
+    weight_decay: null #0.0001
+
+Loss:
+    base_loss: lovasz

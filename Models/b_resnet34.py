@@ -1,6 +1,4 @@
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
+from common import *
 
 #https://github.com/yuhuixu1993/BNET/blob/main/classification/imagenet/models/resnet.py
 IMAGE_RGB_MEAN = [0.485, 0.456, 0.406]

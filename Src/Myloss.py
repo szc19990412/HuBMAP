@@ -2,7 +2,7 @@ import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-
+from pytorch_toolbelt import losses as L
 
 
 def balanced_l1_loss(pred, target, beta=1.0, alpha=0.5, gamma=1.5, reduction="mean"):

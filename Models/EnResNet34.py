@@ -1,11 +1,7 @@
 import sys
-sys.path.append("/home/shaozc/Project/Kaggle-PANDA/Kaggle-PANDA-Solution/") 
+sys.path.append("./") 
 from common import *
-from Configs import *
-from External import *
-from Models import *
-from Myloss import *
-from Utils import *
+from .b_resnet34 import *
 
 #unet ################################################################
 
@@ -75,7 +71,7 @@ class CustomEnResNet34(nn.Module):
     def __init__( self, ):
         super(CustomEnResNet34, self).__init__()
         e = EnResNet34()
-        # self.rgb = RGB()
+        self.rgb = RGB()
 
         self.block0 = e.block0
         self.block1 = e.block1
